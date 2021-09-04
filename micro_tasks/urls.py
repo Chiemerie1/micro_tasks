@@ -12,8 +12,9 @@ app_name = "micro_tasks"
 
 urlpatterns = [
     path("", views.homepage, name="homepage"),
-    path("login/", views.login, name="login"),
-    path("sign_up/", views.sign_up, name="sign up")
+    path("login/", views.log_in, name="login"),
+    path("sign_up/", views.sign_up, name="sign up"),
+    path("console/", views.console, name="console")
 ]
 
 urlpatterns += staticfiles_urlpatterns()

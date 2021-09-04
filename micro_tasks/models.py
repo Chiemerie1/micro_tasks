@@ -7,19 +7,23 @@ from django.db.models.deletion import CASCADE
 
 
 
-class User(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+# class User(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.username
+#     def __str__(self):
+#         return self.username
 
 
 class Profile(models.Model):
+    first_name = models.CharField(max_length=50, blank=True)
+    last_name = models.CharField(max_length=50, blank=True)
     phone = models.CharField(max_length=13)
+    token = models.PositiveIntegerField(default=0, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.username
+
 
 
 class Initaitor(models.Model):
@@ -39,9 +43,9 @@ class Initaitor(models.Model):
                     (SNAPCHAT, "Snapchat"),
                 )
 
-    num_of_followers_req = str(models.CharField(max_length=10, blank=False))
+    num_of_followers_req = models.IntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    initiated = models.PositiveSmallIntegerField(verbose_name="Initiated", choices=SOCIAL_MEDIA)
+    initiated = models.PositiveSmallIntegerField(verbose_name="Initiated", choices=SOCIAL_MEDIA, default=INSTAGRAM)
 
     def __str__(self):
         return f'{self.username} initiate'

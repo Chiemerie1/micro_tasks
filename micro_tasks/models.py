@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
+from django_countries.fields import CountryField
 
 # Create your models here.
 
@@ -20,6 +21,7 @@ class Profile(models.Model):
     phone = models.CharField(max_length=13)
     token = models.PositiveIntegerField(default=0, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    country = CountryField(default=0, blank_label="(select country)")
 
     def __str__(self):
         return self.username

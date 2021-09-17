@@ -24,33 +24,7 @@ class Profile(models.Model):
     country = CountryField(default=0, blank_label="(select country)")
 
     def __str__(self):
-        return self.username
-
-
-
-# class Initaitor(models.Model):
-#     FACEBOOK = 0
-#     YOUTUBE = 1
-#     TWITTER = 2
-#     INSTAGRAM = 3
-#     TIKTOK = 4
-#     SNAPCHAT = 5
-    
-#     SOCIAL_MEDIA = (
-#                     (FACEBOOK, "Facebook"),
-#                     (YOUTUBE, "YouTube"),
-#                     (TWITTER, "Twitter"),
-#                     (INSTAGRAM, "Instagram"),
-#                     (TIKTOK, "TikTok"),
-#                     (SNAPCHAT, "Snapchat"),
-#                 )
-
-#     num_of_followers_req = models.IntegerField(default=0)
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     initiated = models.PositiveSmallIntegerField(choices=SOCIAL_MEDIA, default=INSTAGRAM)
-
-#     def __str__(self):
-#         return self.initiated
+        return self.user.username
 
 
 class Performer(models.Model):
@@ -81,7 +55,7 @@ class Event(models.Model):
 
     num_of_followers_req = models.IntegerField(default=0)
     event_name = models.CharField(max_length=50)
-    event = models.PositiveIntegerField(choices=SOCIAL_MEDIA, default=INSTAGRAM,
+    event = models.PositiveSmallIntegerField(choices=SOCIAL_MEDIA, default=INSTAGRAM,
                  max_length=15)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

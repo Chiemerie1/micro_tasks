@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from .forms import ProfileForm
 
+
 # Create your views here.
 
 def homepage(request):
@@ -44,7 +45,7 @@ def sign_up(request):
 def log_out(request):
     logout(request)
     messages.info(request, "securely signed out")
-    return redirect("micro_tasks:homepage")
+    return redirect("micro_tasks:login")
 
 error_msg = "user is not logged in"
 
@@ -63,9 +64,6 @@ def user_profile(request):
         messages.success(request, "Profile Updated")
     else:
         messages.error(request, error_msg)
-
-    
-
 
 
 def console(request):

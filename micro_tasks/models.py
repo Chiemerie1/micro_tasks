@@ -28,7 +28,41 @@ class Profile(models.Model):
 
 
 
-class Initaitor(models.Model):
+# class Initaitor(models.Model):
+#     FACEBOOK = 0
+#     YOUTUBE = 1
+#     TWITTER = 2
+#     INSTAGRAM = 3
+#     TIKTOK = 4
+#     SNAPCHAT = 5
+    
+#     SOCIAL_MEDIA = (
+#                     (FACEBOOK, "Facebook"),
+#                     (YOUTUBE, "YouTube"),
+#                     (TWITTER, "Twitter"),
+#                     (INSTAGRAM, "Instagram"),
+#                     (TIKTOK, "TikTok"),
+#                     (SNAPCHAT, "Snapchat"),
+#                 )
+
+#     num_of_followers_req = models.IntegerField(default=0)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     initiated = models.PositiveSmallIntegerField(choices=SOCIAL_MEDIA, default=INSTAGRAM)
+
+#     def __str__(self):
+#         return self.initiated
+
+
+class Performer(models.Model):
+    performed = models.BooleanField(default=False, verbose_name="Performer")
+    # initiator = models.BooleanField(Initaitor, default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.performed
+
+
+class Event(models.Model):
     FACEBOOK = 0
     YOUTUBE = 1
     TWITTER = 2
@@ -47,17 +81,11 @@ class Initaitor(models.Model):
 
     num_of_followers_req = models.IntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    initiated = models.PositiveSmallIntegerField(verbose_name="Initiated", choices=SOCIAL_MEDIA, default=INSTAGRAM)
+    # initiated = models.PositiveSmallIntegerField(choices=SOCIAL_MEDIA, default=INSTAGRAM)
+    event_name = models.PositiveSmallIntegerField(choices=SOCIAL_MEDIA, default=INSTAGRAM)
+    performer = models.ManyToManyField(Performer)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.username} initiate'
-
-
-class Performer(models.Model):
-
-    performed = models.BooleanField(default=False, verbose_name="Performer")
-    initiator = models.BooleanField(Initaitor, default=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.performed
+        return self.event_name

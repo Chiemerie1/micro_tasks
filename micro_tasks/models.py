@@ -80,10 +80,9 @@ class Event(models.Model):
                 )
 
     num_of_followers_req = models.IntegerField(default=0)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # initiated = models.PositiveSmallIntegerField(choices=SOCIAL_MEDIA, default=INSTAGRAM)
-    event_name = models.PositiveSmallIntegerField(choices=SOCIAL_MEDIA, default=INSTAGRAM)
-    performer = models.ManyToManyField(Performer)
+    event_name = models.CharField(max_length=50)
+    event = models.PositiveIntegerField(choices=SOCIAL_MEDIA, default=INSTAGRAM,
+                 max_length=15)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
